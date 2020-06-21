@@ -15,7 +15,8 @@
     "build:dev": "cross-env NODE_ENV=development webpack --hide-modules",
     "build-zip": "node scripts/build-zip.js",
     "watch": "npm run build -- --watch",
-    "watch:dev": "cross-env HMR=true npm run build:dev -- --watch"
+    "watch:dev": "cross-env HMR=true npm run build:dev -- --watch",
+    "serve:dev": "webpack-dev-server --config webpack.config.injection.js"
   },
   "husky": {
     "hooks": {}
@@ -39,6 +40,7 @@
     "core-js": "^3.0.1",
     "cross-env": "^5.2.0",
     "css-loader": "^3.4.0",
+    "debug": "^4.1.1",
     "ejs": "^2.6.1",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -59,6 +61,7 @@
     "web-ext-types": "^2.1.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.11.0",
     "webpack-extension-reloader": "^1.1.0"
   }
 }
