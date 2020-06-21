@@ -8,7 +8,7 @@ const eventEmitter = new EventEmitter();
 class PorcoClient {
   constructor() {
     this.session = axios.create({
-      baseURL: 'https://some-domain.com/api',
+      baseURL: 'http://localhost:5000/api',
       timeout: 1000,
       headers: {'X-Porco-Version': 'dev'}
     });
@@ -30,6 +30,17 @@ eventEmitter.on('mtop.taobao.iliad.comment.query.anchorlatest', (result) => {
   }
   this.sendToServer('/comments', { comments })
 });
+
+async function updateLive() {
+  if (window.pageData === undefined || window.pageData.liveDO === undefined) {
+    logger.info('live info not found');
+    setTimeout(updateLive, 1000);
+    return false;
+  }
+  const { liveDO, liveDO: { id } } = window.pageData;
+  const resp = await porco.session.put(`/shows/${id}`, liveDO);
+  console.log(resp);
+}
 
 function patch() {
   if (window.lib === undefined || window.lib.mtop === undefined) {
@@ -57,3 +68,4 @@ function patch() {
 }
 
 patch();
+updateLive();
