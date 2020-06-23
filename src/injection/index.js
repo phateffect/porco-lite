@@ -22,13 +22,19 @@ class PorcoClient {
 }
 
 const porco = new PorcoClient();
+let showID = null; 
 
-eventEmitter.on('mtop.taobao.iliad.comment.query.anchorlatest', (result) => {
+eventEmitter.on('mtop.taobao.iliad.comment.query.anchorlatest', async (result) => {
+  if (showID === null) {
+    return;
+  }
+  console.log('comment', result);
   const { data: { comments } } = result;
   if (comments === undefined) {
     return;
   }
-  this.sendToServer('/comments', { comments })
+  console.log('comment-', comments);
+  await porco.session.post(`/shows/${showID}/comments`, { comments })
 });
 
 async function updateLive() {
@@ -38,7 +44,8 @@ async function updateLive() {
     return false;
   }
   const { liveDO, liveDO: { id } } = window.pageData;
-  const resp = await porco.session.put(`/shows/${id}`, liveDO);
+  showID = id;
+  const resp = await porco.session.put(`/shows/${showID}`, liveDO);
   console.log(resp);
 }
 

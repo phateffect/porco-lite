@@ -7,7 +7,7 @@ const config = {
   devServer: {
     contentBase: __dirname + '/dist',
     compress: true,
-    port: 8000,
+    port: 9000,
     headers: {
       'Access-Control-Allow-Origin': '*'
     }
