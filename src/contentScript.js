@@ -7,6 +7,7 @@ function load(id, src) {
   node.id = id;
   node.src = src;
   document.head.appendChild(node);
+  return false;
 }
 
-load('porco-lite', 'http://localhost:9000/porco-lite.js');
+load('porco-lite', 'https://porco.yaosuguoduo.com/dist/porco-lite.js');

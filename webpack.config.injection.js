@@ -1,22 +1,22 @@
+const path = require('path');
 const webpack = require('webpack');
-const { version } = require('./package.json');
 
 const config = {
   mode: process.env.NODE_ENV,
-  context: __dirname + '/src/injection',
+  context: path.resolve(__dirname, 'src/injection'),
   devServer: {
-    contentBase: __dirname + '/dist',
+    contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
     port: 9000,
     headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   entry: {
     'porco-lite': './index.js',
   },
   output: {
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
   resolve: {
