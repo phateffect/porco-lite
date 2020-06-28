@@ -10,4 +10,4 @@ function load(id, src) {
   return false;
 }
 
-load('porco-lite', 'https://porco.yaosuguoduo.com/dist/porco-lite.js');
+load('porco-lite', porcoLite);

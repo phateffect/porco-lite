@@ -6,8 +6,11 @@ const ExtensionReloader = require('webpack-extension-reloader');
 const { VueLoaderPlugin } = require('vue-loader');
 const { version } = require('./package.json');
 
+const configMode = process.env.NODE_ENV;
+const porcoLite = configMode === 'production' ? 'https://porco.yaosuguoduo.com/dist/porco-lite.js' : 'http://localhost:9000/porco-lite.js';
+
 const config = {
-  mode: process.env.NODE_ENV,
+  mode: configMode,
   context: __dirname + '/src',
   entry: {
     'background': './background.js',
@@ -70,6 +73,7 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       global: 'window',
+      porcoLite: JSON.stringify(porcoLite),
     }),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
@@ -97,7 +101,7 @@ const config = {
   ],
 };
 
-if (config.mode === 'production') {
+if (configMode) {
   config.plugins = (config.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
@@ -105,7 +109,7 @@ if (config.mode === 'production') {
       },
     }),
   ]);
-}
+} 
 
 if (process.env.HMR === 'true') {
   config.plugins = (config.plugins || []).concat([

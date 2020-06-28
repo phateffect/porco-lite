@@ -1,8 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
+const { version } = require('./package.json');
+
+const configMode = process.env.NODE_ENV;
+const porcoServer = configMode === 'production' ? 'https://porco.yaosuguoduo.com/api' : 'http://localhost:8000/api';
 
 const config = {
-  mode: process.env.NODE_ENV,
+  mode: configMode,
   context: path.resolve(__dirname, 'src/injection'),
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
@@ -34,11 +38,13 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       global: 'window',
+      porcoServer: JSON.stringify(porcoServer),
+      porcoVersion: JSON.stringify(version),
     }),
   ],
 };
 
-if (config.mode === 'production') {
+if (configMode === 'production') {
   config.plugins = (config.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {

@@ -7,9 +7,9 @@ const eventEmitter = new EventEmitter();
 class PorcoClient {
   constructor() {
     this.session = axios.create({
-      baseURL: 'https://porco.yaosuguoduo.com/api',
+      baseURL: porcoServer,
       timeout: 1000,
-      headers: { 'X-Porco-Version': 'dev' },
+      headers: { 'X-Porco-Version': porcoVersion },
     });
   }
   reply(commentId, content, isPublic=true) {
@@ -42,27 +42,25 @@ eventEmitter.on('mtop.taobao.iliad.comment.query.anchorlatest', async result => 
   if (comments === undefined) {
     return;
   }
+
+  comments.filter(c => c.renders.render_anchor === undefined).map(c => eventEmitter.emit('porco#comment', c));
   await porco.session.post(`/shows/${showID}/comments`, { comments });
 });
 
-/*
-eventEmitter.on('mtop.mediaplatform.live.pulltopicstat', async result => {
-{
-  "api": "mtop.mediaplatform.live.pulltopicstat",
-  "data": {
-    "digNum": "23924",
-    "msgNum": "171024",
-    "onlineNum": "540",
-    "totalNum": "28933",
-    "visitNum": "55505"
-  },
-  "ret": [
-    "SUCCESS::调用成功"
-  ],
-  "v": "1.0"
-}
+eventEmitter.on('porco#comment', async comment => {
+  const {
+    commentId,
+    content,
+  } = comment;
+  porco.reply(commentId, `你才是: ${content}`);
 });
-*/
+
+eventEmitter.on('mtop.mediaplatform.live.pulltopicstat', async result => {
+  /* 这些都是string */
+  const {
+    data: { digNum, msgNum, onlineNum, totalNum, visitNum }
+  } = result;
+});
 
 async function updateLive() {
   if (window.pageData === undefined || window.pageData.liveDO === undefined) {
