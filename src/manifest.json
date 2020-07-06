@@ -26,5 +26,11 @@
       "*://liveplatform.taobao.com/live/liveDetail.htm*"
     ],
     "js": ["contentScript.js"]
+  }, {
+    "matches": [
+      "*://chuangyi.taobao.com/external/smartPhrase*"
+    ],
+    "js": ["chuangyi.js"],
+    "all_frames": true
   }]
 }

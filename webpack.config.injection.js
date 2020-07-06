@@ -18,6 +18,7 @@ const config = {
   },
   entry: {
     'porco-lite': './index.js',
+    'porco-chuangyi': './chuangyi.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

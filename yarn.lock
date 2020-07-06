@@ -1378,7 +1378,7 @@ aws4@^1.8.0:
   resolved "https://registry.npm.taobao.org/aws4/download/aws4-1.10.0.tgz#a17b3a8ea811060e74d47d306122400ad4497ae2"
   integrity sha1-oXs6jqgRBg501H0wYSJACtRJeuI=
 
-axios@^0.19.0:
+axios@^0.19.2:
   version "0.19.2"
   resolved "https://registry.npm.taobao.org/axios/download/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
   integrity sha1-PqNsXYgY0NX4qKl6bTa4bNwAyyc=
@@ -6847,6 +6847,11 @@ uuid@^3.3.2, uuid@^3.4.0:
   version "3.4.0"
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha1-sj5DWK+oogL+ehAK8fX4g/AgB+4=
+
+uuid@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.npm.taobao.org/uuid/download/uuid-8.2.0.tgz#cb10dd6b118e2dada7d0cd9730ba7417c93d920e"
+  integrity sha1-yxDdaxGOLa2n0M2XMLp0F8k9kg4=
 
 v8-compile-cache@2.0.3:
   version "2.0.3"

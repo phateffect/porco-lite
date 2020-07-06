@@ -47,14 +47,6 @@ eventEmitter.on('mtop.taobao.iliad.comment.query.anchorlatest', async result => 
   await porco.session.post(`/shows/${showID}/comments`, { comments });
 });
 
-eventEmitter.on('porco#comment', async comment => {
-  const {
-    commentId,
-    content,
-  } = comment;
-  porco.reply(commentId, `你才是: ${content}`);
-});
-
 eventEmitter.on('mtop.mediaplatform.live.pulltopicstat', async result => {
   /* 这些都是string */
   const {

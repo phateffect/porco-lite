@@ -7,7 +7,9 @@ const { VueLoaderPlugin } = require('vue-loader');
 const { version } = require('./package.json');
 
 const configMode = process.env.NODE_ENV;
-const porcoLite = configMode === 'production' ? 'https://porco.yaosuguoduo.com/dist/porco-lite.js' : 'http://localhost:9000/porco-lite.js';
+const jsBase = configMode === 'production' ? 'https://porco.yaosuguoduo.com/dist' : 'http://localhost:9000';
+const porcoLite = `${jsBase}/porco-list.js`;
+const porcoChuangyi = `${jsBase}/porco-chuangyi.js`;
 
 const config = {
   mode: configMode,
@@ -15,6 +17,7 @@ const config = {
   entry: {
     'background': './background.js',
     'contentScript': './contentScript.js',
+    'chuangyi': './chuangyi.js',
     'popup/popup': './popup/popup.js',
     'options/options': './options/options.js',
   },
@@ -74,6 +77,7 @@ const config = {
     new webpack.DefinePlugin({
       global: 'window',
       porcoLite: JSON.stringify(porcoLite),
+      porcoChuangyi: JSON.stringify(porcoChuangyi),
     }),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
